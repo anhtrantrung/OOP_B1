@@ -9,23 +9,27 @@ namespace OOP_B1.demo
 {
     internal class DatabaseDemo : Database
     {
-        public void insertTableTest()
+        public void InsertTableTest()
         {
 
         }
-        public void selectTableTest()
+
+        public void SelectTableTest()
         {
 
         }
-        public void updateTableTest()
+
+        public void UpdateTableTest()
         {
 
         }
-        public void deleteTableTest()
+
+        public void DeleteTableTest()
         {
 
         }
-        public void truncateTableTest()
+
+        public void TruncateTableTest()
         {
 
         }

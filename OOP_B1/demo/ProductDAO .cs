@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace OOP_B1.demo
 {
-    internal class ProductDemo : Product
+    internal class ProductDAO : Product
     {
-        public void CreateProductTest()
-        {
-
-        }
-
-        public void PrintProduct(Product product )
+        public int insert(object row)
         {
 
         }

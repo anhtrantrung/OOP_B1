@@ -8,37 +8,33 @@ namespace OOP_B1
 {
     internal class Product
     {
-
         public int id;
         public string name;
         public int categoryId;
-        static void Main(string[] args)
-        {
-        }
-
-        public int getId()
+     
+        public int GetId()
         {
             return id;
         }
-        public void setId(int id)
+        public void SetId(int id)
         {
             this.id = id;
         }
 
-        public string getName()
+        public string GetName()
         {
             return name;
         }
-        public void setName(string name)
+        public void SetName(string name)
         {
             this.name = name;
         }
 
-        public int getcategoryId()
+        public int GetcategoryId()
         {
             return categoryId;
         }
-        public void setcategoryId(int categoryId)
+        public void SetcategoryId(int categoryId)
         {
             this.categoryId = categoryId;
         }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OOP_B1.dao;
+using OOP_B1.entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +10,16 @@ namespace OOP_B1
 {
     internal class Program
     {
-
         public int id;
         public string name;
-        public int categoryId;
+        public int categoryId;  
+        public object obj;
         static void Main(string[] args)
         {
+            Program d = new Program();//gọi hàm trong Program
+            Database database = Database.MakeSingleton();
+            database.SelectTable("PRODUCTABLE", 8);
+            Console.ReadLine();
         }
         
         public int getId()

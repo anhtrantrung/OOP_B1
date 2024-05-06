@@ -1,4 +1,5 @@
-﻿using OOP_B1.dao;
+﻿using OOP.entity;
+using OOP_B1.dao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,23 +8,41 @@ using System.Threading.Tasks;
 
 namespace OOP_B1.demo
 {
-    internal class CategoryDaoDemo : Database
+    internal class CategoryDaoDemo 
     {
-       
-        public object objTest;
-        public void InsertTest()
+        private CategoryDemo categoryDemo;
+        private CategoryDAO categoryDAO;
+
+        public CategoryDaoDemo(CategoryDemo categoryDemo, CategoryDAO categoryDao)
         {
-            InsertTable("PRODUCTABLE", objTest);
+            this.categoryDemo = categoryDemo;
+            this.categoryDAO = categoryDao;
         }
 
-        public void FindAllTest()
+        public void CategoryDaoTest()
         {
-            SelectTable("CATAGORY", objTest);
+            Console.WriteLine("\nInsert catagory:");
+            categoryDAO.Insert(new Product(1, "catagory", 1));
+            PrintData();
+
+            Console.WriteLine("\nUpdate catagory:");
+            categoryDAO.Update(new Product(5, "catagory", 5));
+
+            Console.WriteLine("\nDelete catagory:");
+            categoryDAO.Delete(new Product(1, "catagory", 1), 1);
+            PrintData();
+
+            Console.WriteLine("\nTruncate catagory:");
+            categoryDAO.Truncate(new Product(1, "catagory", 1));
+            PrintData();
         }
 
-        public void UpdateTest()
+        public void PrintData()
         {
-            UpdateTable("ACCESORY", objTest);
+            foreach (BaseRow row in Database.MakeSingleton().SelectTable("catagory"))
+            {
+                Console.WriteLine(row.GetData());
+            }
         }
     }
 }

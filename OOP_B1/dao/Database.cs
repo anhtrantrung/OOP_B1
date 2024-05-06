@@ -1,66 +1,59 @@
-﻿using OOP_B1.entity;
+﻿using OOP.entity;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace OOP_B1.dao
 {
     internal class Database
     {
         private static Database instance;
-        public List<object> producTable = new List<object>();
-        public List<object> catagoryTable = new List<object>();
-        public List<object> accesoryTable = new List<object>();
-        const string produc = "PRODUCTABLE";
-        const string catagory = "CATAGORY";
-        const string accesory = "ACCESORY";
+        private List<BaseRow> producTable = new List<BaseRow>();
+        private List<BaseRow> catagoryTable = new List<BaseRow>();
+        private List<BaseRow> accesoryTable = new List<BaseRow>();
+        const string PRODUCTABLE = "product";
+        const string CATAGORY = "catagory";
+        const string ACCESORY = "accesory";
         public Database instants;
-        public Product product;
-        public Category category;
-        public Accessotion accession;
-       public static Database MakeSingleton()
+ 
+        public static Database MakeSingleton()
         {
             if (instance == null)
             { instance = new Database(); }
-
-           return instance; ;
+            return instance; ;
         }
 
-        public void InsertTable(string name, object row)
+        public void InsertTable(string name, BaseRow row)
         {
-            if (name == produc)
+            if (name == PRODUCTABLE)
             {
-                producTable.Add(row);
+                producTable.Add(row); 
             }
 
-            if (name == catagory)
+            if (name == CATAGORY)
             {
                 catagoryTable.Add(row);
             }
 
-            if (name == accesory)
+            if (name == ACCESORY)
             {
-                accesoryTable.Add(row);
+                accesoryTable.Add(row);               
             }
         }
 
-        public List<object> SelectTable(string name, object where)
+        public List<BaseRow> SelectTable(string name)
         {
-            if (name == produc)
+            if (name == PRODUCTABLE)
             {
                 return producTable;
             }
 
-            if (name == catagory)
+            if (name == CATAGORY)
             {
                 return catagoryTable;
             }
 
-            if (name == accesory)
+            if (name == ACCESORY)
             {
                 return accesoryTable;
             }
@@ -68,113 +61,99 @@ namespace OOP_B1.dao
             else
             {
                 return null;
-            } 
+            }
         }
 
-        public void UpdateTable(string name, object row)
+        public int UpdateTable(string name, BaseRow baseRow)
         {
-            if (name == produc)
+            if (name == PRODUCTABLE)
             {
-                foreach (int count in producTable)
+                Product product = (Product)Database.MakeSingleton().producTable.FirstOrDefault(productObject => productObject.GetId() == baseRow.GetId());
+                if (product != null)
                 {
-                    if(count == product.GetId())
-                    {
-                        producTable.Add(row);
-                        return;
-                    }    
+                    product.SetData(baseRow.GetId(), baseRow.GetName(), baseRow.GetCategoryId());
                 }
+                return 1;
             }
 
-            if (name == catagory)
+            if (name == CATAGORY)
             {
-                foreach (int count in producTable)
+                Category category = (Category)Database.MakeSingleton().producTable.FirstOrDefault(categoryObject => categoryObject.GetId() == baseRow.GetId());
+                if (category != null)
                 {
-                    if (count == category.GetId())
-                    {
-                        catagoryTable.Add(row);
-                        return;
-                    }
+                    category.SetData(baseRow.GetId(), baseRow.GetName(), baseRow.GetCategoryId());
                 }
+                return 1;
             }
 
-            if (name == accesory)
+            if (name == ACCESORY)
             {
-                foreach (int count in producTable)
+                Accessotion accessotion = (Accessotion)Database.MakeSingleton().producTable.FirstOrDefault(accessotionObject => accessotionObject.GetId() == baseRow.GetId());
+                if (accessotion != null)
                 {
-                    if (count == accession.GetId())
-                    {
-                        accesoryTable.Add(row);
-                        return;
-                    }
+                    accessotion.SetData(baseRow.GetId(), baseRow.GetName(), baseRow.GetCategoryId());
                 }
+                return 1;
             }
+
+            return 0;
         }
 
-        public void DeleteTable(string name, object row)
+        public void DeleteTable(string name, int id)
         {
-            if (name == produc)
+            if (name == PRODUCTABLE)
             {
-                foreach (var obj in producTable)
-                {
-                    if (obj == row)
+                    if (name == PRODUCTABLE)
                     {
-                        producTable.Remove(obj);
+                        producTable.RemoveAll(productObject => productObject.GetId() == id);
                         return;
-                    }
+                    }           
+            }
+
+            if (name == CATAGORY)
+            {
+
+                if (name == CATAGORY)
+                {
+                    catagoryTable.RemoveAll(productObject => productObject.GetId() == id);
+                    return;
                 }
             }
 
-            if (name == catagory)
+            if (name == ACCESORY)
             {
-                foreach (var obj in catagoryTable)
+                if (name == ACCESORY)
                 {
-                    if (obj == row)
-                    {
-                        catagoryTable.Remove(obj);
-                        return;
-                    }
-                }
-            }
-
-            if (name == accesory)
-            {
-                foreach (var obj in accesoryTable)
-                {
-                    if (obj == row)
-                    {
-                        accesoryTable.Remove(obj);
-                        return;
-                    }
+                    accesoryTable.RemoveAll(productObject => productObject.GetId() == id);
+                    return;
                 }
             }
         }
+
         public void TruncateTable(string name)
         {
-            if (name == produc)
+            if (name == PRODUCTABLE)
             {
                 producTable.Clear();
                 return;
             }
 
-            if (name == catagory)
+            if (name == CATAGORY)
             {
                 catagoryTable.Clear();
                 return;
             }
 
-            if (name == accesory)
+            if (name == ACCESORY)
             {
                 accesoryTable.Clear();
                 return;
             }
         }
-
-        public void UpdateTableById(int id, object row)
-        {
-
-        }
     }
 
-
-
 }
+
+
+
+

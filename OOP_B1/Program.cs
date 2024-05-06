@@ -1,55 +1,45 @@
-﻿using OOP_B1.dao;
-using OOP_B1.entity;
+﻿using OOP.demo;
+using OOP.entity;
+using OOP_B1.dao;
+using OOP_B1.demo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OOP_B1
 {
     internal class Program
     {
-        public int id;
-        public string name;
-        public int categoryId;  
-        public object obj;
+        private ProductDaoDemo productDaoDemo = new ProductDaoDemo(new ProductDemo(), new ProductDAO());
+        private CategoryDaoDemo categoryDaoDemo = new CategoryDaoDemo(new CategoryDemo(), new CategoryDAO());
+        private AccessoryDAODemo accessoryDAODemo = new AccessoryDAODemo(new AccessotionDemo(), new AccessoryDAO());
+
         static void Main(string[] args)
         {
-            Program d = new Program();//gọi hàm trong Program
-            Database database = Database.MakeSingleton();
-            database.SelectTable("PRODUCTABLE", 8);
-            Console.ReadLine();
-        }
-        
-        public int getId()
-        {
-            return id;
-        }
-        public void setId(int id)
-        {
-            this.id = id;
+            Program program = new Program();
+            program.TestProduct();
         }
 
-        public string getName()
+        private void TestProduct()
         {
-            return name;
-        }
-        public void setName(string name)
-        {
-            this.name = name;
+            productDaoDemo.ProductDaoTest();
         }
 
-        public int getcategoryId()
+        private void TestCategory()
         {
-            return categoryId;
-        }
-        public void setcategoryId(int categoryId)
-        {
-            this.categoryId = categoryId;
+            categoryDaoDemo.CategoryDaoTest();
         }
 
+        private void AccessoryProduct()
+        {
+            accessoryDAODemo.AccessotionDaoTest();
+        }
     }
-
 }
+
+
 

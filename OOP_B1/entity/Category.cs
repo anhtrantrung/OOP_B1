@@ -4,44 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOP_B1.entity
+namespace OOP.entity
 {
-    internal class Category
+    class Category : BaseRow
     {
-        public int id;
-        public string name;
-        public int categoryId;
+        public Category() { }
 
-        public int GetId()
-        {
-            return id;
-        }
-
-        public void SetId(int id)
+        public Category(int id, string name, int categoryID)
         {
             this.id = id;
-        }
-
-        public string GetName()
-        {
-            return name;
-        }
-
-        public void SetName(string name)
-        {
             this.name = name;
+            this.categoryID = categoryID;
         }
-
-        public int GetcategoryId()
-        {
-            return categoryId;
-        }
-
-        public void SetcategoryId(int categoryId)
-        {
-            this.categoryId = categoryId;
-        }
-
     }
 }
-
